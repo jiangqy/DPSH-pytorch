@@ -1,5 +1,5 @@
 ---
-Source code for paper "Feature Learning based Deep Supervised Hashing with Pairwise Labels"
+A pytorch implementation for paper "Feature Learning based Deep Supervised Hashing with Pairwise Labels"
 ---
 ### 1. Running example:
 Environment: python 3
