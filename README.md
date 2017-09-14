@@ -13,7 +13,11 @@ torchvision
 As pytorch doesn't provide pretrained VGG-F model, unlike original DPSH [paper](https://cs.nju.edu.cn/lwj/paper/IJCAI16_DPSH.pdf), we use pretrained Alexnet or pretrained VGG-11 for feature learning part instead of pretrained VGG-F.
 ### 3. Data processing:
 Following DPSH MatConvNet source code, we can obtain cifar-10.mat. To prepare data for pytorch version DPSH, run script ./data/CIFAR-10/SaveFig.m to save image files.
-### 4. Result:
+### 6. Demo:
+```python
+python DPSH_CIFAR_10_demo.py
+```
+### 5. Result:
 #### Mean Average Precision on CIFAR-10.
 <table>
     <tr>
