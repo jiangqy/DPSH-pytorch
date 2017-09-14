@@ -38,10 +38,11 @@ python DPSH_CIFAR_10_demo.py
         <td >VGG-11</td><td >Pytorch</td ><td > 0.7655 </td> <td > 0.8042 </td><td > 0.8070 </td> <td > 0.8108 </td>
     </tr>
 </table>
+
 #### Training Loss on CIFAR-10.
 
 ![](./fig/CIFAR-10-loss.png)
-### 6. Influence of  Hyper-Parameter \\(\lambda\\)
+### 6. Influence of  Hyper-Parameter $\lambda$
 
 ![](./fig/CIFAR-10-lambda.png)
 
