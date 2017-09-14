@@ -1,6 +1,7 @@
 ---
 A pytorch implementation for paper "Feature Learning based Deep Supervised Hashing with Pairwise Labels"
 ---
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 ### 1. Running example:
 Environment: python 3
 
@@ -37,3 +38,8 @@ python DPSH_CIFAR_10_demo.py
         <td >VGG-11</td><td >Pytorch</td ><td > 0.7655 </td> <td > 0.8042 </td><td > 0.8070 </td> <td > 0.8108 </td>
     </tr>
 </table>
+#### Training Loss on CIFAR-10.
+![Training Loss](./fig/CIFAR-10-loss.pdf)
+### 6. Influence of  Hyper-Parameter \\(\lambda\\)
+![\\(\lambda\\)](./fig/CIFAR-10-lambda.pdf)
+
