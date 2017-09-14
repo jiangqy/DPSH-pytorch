@@ -39,7 +39,9 @@ python DPSH_CIFAR_10_demo.py
     </tr>
 </table>
 #### Training Loss on CIFAR-10.
+
 ![](./fig/CIFAR-10-lambda.png)
 ### 6. Influence of  Hyper-Parameter \\(\lambda\\)
+
 ![](./fig/CIFAR-10-lambda.png)
 
