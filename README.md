@@ -31,6 +31,9 @@ python DPSH_CIFAR_10_demo.py
         <td >VGG-F</td><td >MatConvNet</td ><td > 0.713 </td> <td > 0.727 </td><td > 0.744</td><td > 0.757</td>  
     </tr>
     <tr>
-        <td >Alexnet</td><td >Pytorch</td ><td > 0.740</td> <td > 0.774</td><td > 0.772 </td> <td > 0.768</td>
+        <td >Alexnet</td><td >Pytorch</td ><td > 0.7505</td> <td > 0.7724 </td><td > 0.7758 </td> <td > 0.7828 </td>
+    </tr>
+    <tr>
+        <td >VGG-11</td><td >Pytorch</td ><td > 0.7655 </td> <td > 0.8042 </td><td > 0.8070 </td> <td > 0.8108 </td>
     </tr>
 </table>

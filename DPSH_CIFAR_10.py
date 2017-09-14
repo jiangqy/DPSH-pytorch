@@ -7,7 +7,7 @@ from torchvision import models
 import os
 import numpy as np
 import pickle
-
+from datetime import datetime
 
 import utils.DataProcessing as DP
 import utils.CalcHammingRanking as CalcHR
@@ -104,7 +104,6 @@ def DPSH_algo(bit, param, gpu_ind=0):
     param['epochs'] = epochs
     param['learning rate'] = learning_rate
     param['model'] = model_name
-    param['filename'] = filename
 
     ### data processing
     transformations = transforms.Compose([
@@ -113,13 +112,13 @@ def DPSH_algo(bit, param, gpu_ind=0):
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
-    dset_database = DP.DatasetProcessing(
+    dset_database = DP.DatasetProcessingCIFAR_10(
         DATA_DIR, DATABASE_FILE, DATABASE_LABEL, transformations)
 
-    dset_train = DP.DatasetProcessing(
+    dset_train = DP.DatasetProcessingCIFAR_10(
         DATA_DIR, TRAIN_FILE, TRAIN_LABEL, transformations)
 
-    dset_test = DP.DatasetProcessing(
+    dset_test = DP.DatasetProcessingCIFAR_10(
         DATA_DIR, TEST_FILE, TEST_LABEL, transformations)
 
     num_database, num_train, num_test = len(dset_database), len(dset_train), len(dset_test)
@@ -208,7 +207,7 @@ def DPSH_algo(bit, param, gpu_ind=0):
 
             # print('[Training Phase][Epoch: %3d/%3d][Iteration: %3d/%3d] Loss: %3.5f' % \
             #       (epoch + 1, epochs, iter + 1, np.ceil(num_train / batch_size),loss.data[0]))
-        print('[Train Phase][Epoch: %3d/%3d][Loss: %3.5f]' % (epoch+1, epochs, epoch_loss / len(train_loader)))
+        print('[Train Phase][Epoch: %3d/%3d][Loss: %3.5f]' % (epoch+1, epochs, epoch_loss / len(train_loader)), end='')
         optimizer = AdjustLearningRate(optimizer, epoch, learning_rate)
 
         l, l1, l2, t1 = Totloss(U, B, Sim, lamda, num_train)
@@ -217,16 +216,17 @@ def DPSH_algo(bit, param, gpu_ind=0):
         totl2_record.append(l2)
         t1_record.append(t1)
 
-        print('[Total Loss: %10.5f][total L1: %10.5f][total L2: %10.5f][norm theta: %3.5f]' % (l, l1, l2, t1))
+        print('[Total Loss: %10.5f][total L1: %10.5f][total L2: %10.5f][norm theta: %3.5f]' % (l, l1, l2, t1), end='')
 
         ### testing during epoch
         qB = GenerateCode(model, test_loader, num_test, bit, use_gpu)
         tB = torch.sign(B).numpy()
         map_ = CalcHR.CalcMap(qB, tB, test_labels_onehot.numpy(), train_labels_onehot.numpy())
-        train_loss.append(epoch_loss / num_train)
+        train_loss.append(epoch_loss / len(train_loader))
         map_record.append(map_)
 
         print('[Test Phase ][Epoch: %3d/%3d] MAP(retrieval train): %3.5f' % (epoch+1, epochs, map_))
+        print(len(train_loader))
     ### evaluation phase
     ## create binary code
     model.eval()
@@ -255,13 +255,14 @@ def DPSH_algo(bit, param, gpu_ind=0):
 
 if __name__=='__main__':
     bit = 12
-    lamda = 10
-    gpu_ind = 4
+    lamda = 50
+    gpu_ind = 0
+    filename = 'log/DPSH_' + str(bit) + 'bits_NUS-WIDE_' + datetime.now().strftime("%y-%m-%d-%H-%M-%S") + '.pkl'
     param = {}
     param['lambda'] = lamda
+    param['filename'] = filename
     result = DPSH_algo(bit, param, gpu_ind)
     fp = open(result['filename'], 'wb')
     pickle.dump(result, fp)
     fp.close()
-
 

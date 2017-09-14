@@ -1,13 +1,13 @@
-import DPSH_CIFAR as dpsh
+import DPSH_CIFAR_10 as dpsh
 import pickle
 from datetime import datetime
 
 def DPSH_CIFAR_10_demo():
-    lamda = 100
+    lamda = 10
     param = {}
     param['lambda'] = lamda
 
-    gpu_ind = 5
+    gpu_ind = 7
     bits = [12, 24, 32, 48]
     for bit in bits:
         filename = 'log/DPSH_' + str(bit) + 'bits_CIFAR-10' + '_' + datetime.now().strftime("%y-%m-%d-%H-%M-%S") + '.pkl'
