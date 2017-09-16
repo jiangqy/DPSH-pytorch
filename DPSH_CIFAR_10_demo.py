@@ -23,4 +23,3 @@ def DPSH_CIFAR_10_demo():
 
 if __name__=="__main__":
     DPSH_CIFAR_10_demo()
-
